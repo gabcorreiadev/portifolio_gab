@@ -1,0 +1,72 @@
+@use "../styles/mixins" as *;
+
+.loader {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  display: grid;
+  place-content: center;
+  justify-items: center;
+  gap: 22px;
+  background: var(--bg);
+  transition: opacity 0.5s ease, visibility 0.5s;
+
+  :global(html:not(.js)) & {
+    display: none;
+  }
+}
+
+.saindo {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.marca {
+  @include mono;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 2.5rem;
+  font-weight: 600;
+}
+
+.seta {
+  color: var(--accent);
+  animation: seta 0.9s ease-in-out infinite;
+}
+
+.letras {
+  color: var(--text);
+}
+
+@keyframes seta {
+  50% {
+    transform: translateX(8px);
+  }
+}
+
+.barra {
+  width: 120px;
+  height: 3px;
+  border-radius: 3px;
+  background: var(--border);
+  overflow: hidden;
+
+  span {
+    display: block;
+    width: 40%;
+    height: 100%;
+    border-radius: 3px;
+    background: var(--primary);
+    animation: barra 1s ease-in-out infinite;
+  }
+}
+
+@keyframes barra {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(250%);
+  }
+}

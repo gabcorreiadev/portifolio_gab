@@ -1,0 +1,155 @@
+@use "../styles/mixins" as *;
+
+.secao {
+  background: var(--surface-2);
+  border-block: 1px solid var(--border);
+}
+
+.aviso {
+  @include mono;
+  font-size: 0.8125rem !important;
+  color: var(--accent) !important;
+}
+
+.filtros {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: -16px 0 32px;
+
+  button {
+    min-height: 40px;
+    padding: 0 18px;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    font-weight: 600;
+    font-size: 0.9rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover {
+      border-color: var(--primary);
+    }
+  }
+
+  .ativo {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--on-primary);
+  }
+}
+
+.lista {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 20px;
+
+  @include up($bp-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include up($bp-lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.card {
+  @include card;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 26px;
+  animation: entrar 0.45s var(--ease-out) both;
+
+  blockquote {
+    margin: 0;
+    flex: 1;
+    font-size: 0.975rem;
+  }
+}
+
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+.aspas {
+  color: var(--accent);
+}
+
+.autor {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding-top: 16px;
+  border-top: 1px solid var(--border);
+}
+
+.avatar {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+}
+
+.iniciais {
+  display: grid !important;
+  place-items: center;
+  background: var(--primary);
+  color: var(--on-primary);
+  font-weight: 700;
+}
+
+.nome {
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.selo {
+  @include mono;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--accent) 18%, transparent);
+  color: var(--accent);
+  font-size: 0.6875rem;
+  font-weight: 600;
+}
+
+.cargo,
+.empresa {
+  font-size: 0.8125rem;
+  color: var(--text-muted);
+  line-height: 1.4;
+}
+
+.linkedin {
+  margin-left: auto;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  transition: all 0.2s ease;
+
+  &:hover {
+    color: var(--primary);
+    border-color: var(--primary);
+  }
+}
