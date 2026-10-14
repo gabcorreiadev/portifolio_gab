@@ -508,14 +508,17 @@ html.lenis body {
   }
 }
 
+/*
+ * Entrada da página: SÓ opacidade. Um transform (mesmo terminado, com fill-mode) faria
+ * o wrapper virar bloco de contenção de position: fixed e quebraria os pins do GSAP.
+ */
 .page-enter {
-  animation: pageEnter 0.8s 0.25s var(--ease-out) both;
+  animation: pageEnter 0.7s 0.25s ease backwards;
 }
 
 @keyframes pageEnter {
   from {
     opacity: 0;
-    transform: translateY(24px);
   }
 }
 

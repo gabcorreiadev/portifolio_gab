@@ -5,6 +5,7 @@ next-env.d.ts
 *.tsbuildinfo
 .DS_Store
 .env*
+/Claude outputs
 
 # fotos originais (alta resolução) — as versões otimizadas ficam em public/img
 /fotos/

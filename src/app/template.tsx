@@ -22,7 +22,13 @@ export default function Template({ children }: { children: React.ReactNode }) {
   return (
     <>
       {cortina && <div className="page-curtain" aria-hidden />}
-      <div className={jaNavegou ? "page-enter" : undefined}>{children}</div>
+      <div
+        className={jaNavegou ? "page-enter" : undefined}
+        // Remove a classe ao terminar: nenhum estilo de animação fica pendurado no wrapper
+        onAnimationEnd={(e) => e.target === e.currentTarget && e.currentTarget.classList.remove("page-enter")}
+      >
+        {children}
+      </div>
     </>
   );
 }
