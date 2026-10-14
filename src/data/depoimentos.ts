@@ -37,7 +37,8 @@ export const depoimentos: Depoimento[] = [
     empresa: "Be.Aliant",
     linkedin: "https://www.linkedin.com/in/gabrielwneves/",
     foto: "/img/depoimentos/gabriel-neves.webp",
-    texto: "",
+    texto:
+      "Tenho o privilégio de dividir a jornada profissional com o Gabriel, alguém que une competência, integridade e maturidade. Ele não só entrega resultados: inspira confiança e eleva o padrão de excelência por onde passa. Tenho certeza de que ainda vai muito longe.",
   },
   {
     slug: "ricardo-santos",
@@ -45,7 +46,7 @@ export const depoimentos: Depoimento[] = [
     cargo: "Desenvolvedor",
     empresa: "Revizia",
     linkedin: "https://www.linkedin.com/in/ricardo-asantos/",
-    foto: null, // TODO: foto pendente
+    foto: "/img/depoimentos/ricardo-santos.webp",
     texto: "",
   },
   {
@@ -83,7 +84,8 @@ export const depoimentos: Depoimento[] = [
     empresa: "Paynet",
     linkedin: "https://www.linkedin.com/in/guilhermezalla/",
     foto: "/img/depoimentos/guilherme-zalla.webp",
-    texto: "",
+    texto:
+      "Trabalhei com o Gabriel no tempo da Paynet e foi um prazer tê-lo como colega de equipe. Sempre demonstrou comprometimento, proatividade e atenção às demandas da empresa, destacando-se pela eficiência, dedicação e disposição para colaborar com a equipe. É um excelente profissional, com quem tive uma ótima experiência de trabalho e que recomendo com confiança.",
   },
 ];
 

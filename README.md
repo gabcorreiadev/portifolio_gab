@@ -36,7 +36,7 @@ Imagens ficam em `public/img/` (`hero/`, `projetos/`, `depoimentos/`). Use WebP;
 
 | Rota | Arquivo | Conteúdo |
 | --- | --- | --- |
-| `/` | `src/app/page.tsx` | Hero, manifesto, marquee de stacks, números, galeria horizontal de projetos, atalhos para as páginas |
+| `/` | `src/app/page.tsx` | Hero, manifesto, marquee de stacks, números, galeria horizontal de projetos, depoimentos (carrossel) |
 | `/sobre/` | `src/app/sobre/page.tsx` | Resumo, soft skills, stacks, curiosidades em cards empilhados, versículo |
 | `/trajetoria/` | `src/app/trajetoria/page.tsx` | Ano gigante por marco, experiência, formação |
 | `/projetos/` | `src/app/projetos/page.tsx` | Destaques (`destaque: true`) em blocos grandes; o resto em cards com filtro por tecnologia; GitHub em números; bastidores |
@@ -57,6 +57,6 @@ Os efeitos ficam todos em `src/components/Effects.tsx` e são ligados por atribu
 - Atualizar `contribuicoes` em `src/data/github.ts` de tempos em tempos (repositórios e seguidores atualizam sozinhos).
 - Confirmar o título do cargo na Revizia e a instituição da formação Azure.
 - Conferir a redação NAA dos versículos e completar a lista.
-- Foto do Ricardo A. Santos e os textos dos 8 depoimentos.
+- Depoimentos: faltam 6 textos (publicados: Gabriel Neves e Guilherme Zalla) e a foto do Ricardo A. Santos.
 - Corrigir no PDF do currículo: GitHub (biel5z → gabcorreiadev), “OBEJTIVO” e o cargo da Revizia.
 - `src/components/Motion.tsx` não é mais usado e pode ser apagado.

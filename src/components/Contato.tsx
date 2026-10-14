@@ -10,7 +10,7 @@ const canais = [
   { icone: "mail", nome: "E-mail", valor: perfil.email, href: `mailto:${perfil.email}`, externo: false },
   { icone: "linkedin", nome: "LinkedIn", valor: "gabriel-correia-reis", href: perfil.linkedin, externo: true },
   { icone: "github", nome: "GitHub", valor: "gabcorreiadev", href: perfil.github, externo: true },
-  { icone: "instagram", nome: "Instagram", valor: "@gabcorreia", href: perfil.instagram, externo: true },
+  { icone: "instagram", nome: "Instagram", valor: "@gabcorreiareis", href: perfil.instagram, externo: true },
 ];
 
 const assuntos = ["Vaga de emprego", "Projeto freelance", "Parceria", "Só dizer oi"];

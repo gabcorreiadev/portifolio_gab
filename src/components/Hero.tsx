@@ -5,6 +5,9 @@ import Link from "next/link";
 import Icon from "./Icon";
 import styles from "./Hero.module.scss";
 
+const formatarLista = (l: readonly string[]) =>
+  l.length <= 1 ? l.join("") : `${l.slice(0, -1).join(", ")} e ${l[l.length - 1]}`;
+
 export default function Hero() {
   const [primeiro, ...resto] = perfil.nome.split(" ");
   return (
@@ -48,9 +51,9 @@ export default function Hero() {
           </div>
 
           {depoimentosPublicados.length > 0 && (
-            <p className={styles.prova} data-hero>
-              Recomendado por profissionais da {empresas.slice(0, -1).join(", ")} e {empresas[empresas.length - 1]}
-            </p>
+            <a href="#depoimentos" className={styles.prova} data-hero>
+              Recomendado por profissionais da {formatarLista(empresas.filter((e) => depoimentosPublicados.some((d) => d.empresa === e)))}
+            </a>
           )}
         </div>
 

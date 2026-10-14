@@ -34,10 +34,12 @@ export function SobreHeader() {
             </div>
           )}
         </div>
-        <div className={styles.foto} data-zoom>
+        <div className={styles.foto} data-reveal>
+          <div className={styles.glow} aria-hidden />
+          <div className={styles.ring} aria-hidden />
           {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src="/img/hero/gabriel-estudio.webp" alt="Gabriel Correia Reis em estúdio, com luz verde ao fundo"
-            width={960} height={1200} />
+          <img src="/img/hero/gabriel-bracos.webp" alt="Gabriel Correia Reis sorrindo, de braços cruzados"
+            width={900} height={1581} fetchPriority="high" />
         </div>
       </div>
     </header>
@@ -48,10 +50,18 @@ export function SobreHeader() {
 export function Resumo() {
   return (
     <section className="section" aria-labelledby="resumo-titulo">
-      <div className="container">
-        <h2 id="resumo-titulo" className="sr-only">Resumo</h2>
-        <p className={styles.resumoGrande} data-fill>{resumo[0]}</p>
-        <p className={styles.resumoTexto} data-reveal>{resumo[1]}</p>
+      <div className={`container ${styles.resumoGrid}`}>
+        <div>
+          <h2 id="resumo-titulo" className="sr-only">Resumo</h2>
+          <p className={styles.resumoGrande} data-fill>{resumo[0]}</p>
+          <p className={styles.resumoTexto} data-reveal>{resumo[1]}</p>
+        </div>
+        <div className={`${styles.foto} ${styles.fotoMenor}`} data-reveal>
+          <div className={styles.glow} aria-hidden />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/img/hero/gabriel-pensativo.webp" alt="Gabriel Correia Reis pensativo, com a mão no queixo"
+            width={900} height={1301} loading="lazy" decoding="async" data-parallax="0.12" />
+        </div>
       </div>
     </section>
   );

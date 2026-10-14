@@ -9,14 +9,15 @@ export const perfil = {
   naAreaDesde: "2023-09-01",
   site: "https://gabcorreia.com.br",
   email: "contato@gabcorreia.com.br",
+  /** WhatsApp Business (o número pessoal não aparece no site). */
   whatsapp: {
-    numero: "5511942310355",
-    exibicao: "(11) 94231-0355",
+    numero: "5511978461426",
+    exibicao: "(11) 97846-1426",
     mensagem: "Olá, Gabriel! Vi seu portfólio e gostaria de conversar.",
   },
   linkedin: "https://www.linkedin.com/in/gabriel-correia-reis",
   github: "https://github.com/gabcorreiadev",
-  instagram: "https://www.instagram.com/gabcorreia",
+  instagram: "https://www.instagram.com/gabcorreiareis",
   /** Caminho do currículo em PDF dentro de /public. Deixe null enquanto o PDF não existir. */
   curriculo: "/cv/curriculo-gabriel-correia-reis.pdf" as string | null,
   foto: "/img/hero/gabriel.webp",

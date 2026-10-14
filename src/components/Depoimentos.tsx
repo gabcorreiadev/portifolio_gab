@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { depoimentos, type Depoimento } from "@/data/depoimentos";
 import { empresas } from "@/data/experiencia";
 import { iniciais } from "@/lib/utils";
@@ -18,6 +18,8 @@ const TEXTO_EXEMPLO =
 export default function Depoimentos() {
   const [preview, setPreview] = useState(false);
   const [filtro, setFiltro] = useState<string>("Todas");
+  const trilho = useRef<HTMLUListElement>(null);
+  const [nav, setNav] = useState({ atual: 1, total: 1, inicio: true, fim: true });
 
   useEffect(() => {
     setPreview(new URLSearchParams(window.location.search).get("preview") === "depoimentos");
@@ -31,10 +33,41 @@ export default function Depoimentos() {
     [preview]
   );
 
-  if (lista.length === 0) return null;
-
   const filtros = ["Todas", ...empresas.filter((e) => lista.some((d) => d.empresa === e))];
   const visiveis = filtro === "Todas" ? lista : lista.filter((d) => d.empresa === filtro);
+
+  // Estado das setas e do contador do carrossel
+  const atualizar = useCallback(() => {
+    const el = trilho.current;
+    if (!el) return;
+    const card = el.firstElementChild as HTMLElement | null;
+    const passo = card ? card.offsetWidth + 20 : el.clientWidth;
+    const porTela = Math.max(1, Math.round(el.clientWidth / passo));
+    const total = Math.max(1, el.children.length - porTela + 1);
+    const atual = Math.min(total, Math.round(el.scrollLeft / passo) + 1);
+    setNav({ atual, total, inicio: el.scrollLeft < 8, fim: el.scrollLeft + el.clientWidth >= el.scrollWidth - 8 });
+  }, []);
+
+  useEffect(() => {
+    const el = trilho.current;
+    if (!el) return;
+    el.scrollTo({ left: 0 });
+    atualizar();
+    el.addEventListener("scroll", atualizar, { passive: true });
+    window.addEventListener("resize", atualizar);
+    return () => {
+      el.removeEventListener("scroll", atualizar);
+      window.removeEventListener("resize", atualizar);
+    };
+  }, [atualizar, filtro, lista]);
+
+  const mover = (dir: 1 | -1) => {
+    const el = trilho.current;
+    const card = el?.firstElementChild as HTMLElement | null;
+    if (el && card) el.scrollBy({ left: dir * (card.offsetWidth + 20), behavior: "smooth" });
+  };
+
+  if (lista.length === 0) return null;
 
   return (
     <section id="depoimentos" className={`section ${styles.secao}`} aria-labelledby="depoimentos-titulo">
@@ -45,6 +78,7 @@ export default function Depoimentos() {
           {preview && <p className={styles.aviso}>Modo de pré-visualização: textos de exemplo.</p>}
         </div>
 
+        <div className={styles.barra}>
         <div className={styles.filtros} role="group" aria-label="Filtrar depoimentos por empresa">
           {filtros.map((f) => (
             <button key={f} type="button" aria-pressed={filtro === f}
@@ -53,8 +87,20 @@ export default function Depoimentos() {
             </button>
           ))}
         </div>
+        {nav.total > 1 && (
+          <div className={styles.setas}>
+            <span className={styles.contador} aria-live="polite">{nav.atual} / {nav.total}</span>
+            <button type="button" onClick={() => mover(-1)} disabled={nav.inicio} aria-label="Depoimento anterior">
+              <Icon name="arrowRight" size={18} className={styles.esq} />
+            </button>
+            <button type="button" onClick={() => mover(1)} disabled={nav.fim} aria-label="Próximo depoimento">
+              <Icon name="arrowRight" size={18} />
+            </button>
+          </div>
+        )}
+        </div>
 
-        <ul className={styles.lista} aria-live="polite">
+        <ul className={styles.lista} ref={trilho} aria-label="Depoimentos" data-lenis-prevent-wheel>
           {visiveis.map((d) => (
             <li key={d.slug} className={styles.card} data-spot>
               <Icon name="quote" size={26} className={styles.aspas} />

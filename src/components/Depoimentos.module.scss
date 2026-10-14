@@ -40,19 +40,91 @@
   }
 }
 
+/* Barra com filtros (esquerda) e setas do carrossel (direita) */
+.barra {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  margin: -16px 0 28px;
+
+  .filtros {
+    margin: 0;
+  }
+}
+
+.setas {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-left: auto;
+
+  button {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--primary);
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover:not(:disabled) {
+      background: var(--primary);
+      border-color: var(--primary);
+      color: var(--on-primary);
+    }
+
+    &:disabled {
+      opacity: 0.35;
+      cursor: default;
+    }
+  }
+}
+
+.contador {
+  @include mono;
+  min-width: 48px;
+  text-align: right;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.esq {
+  transform: rotate(180deg);
+}
+
+/* Carrossel horizontal: 1 card por tela no mobile, 2 no tablet, 3 no desktop */
 .lista {
   list-style: none;
-  padding: 0;
   margin: 0;
-  display: grid;
+  padding: 4px 2px 16px;
+  display: flex;
   gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  overscroll-behavior-x: contain;
+  scrollbar-width: none;
 
-  @include up($bp-md) {
-    grid-template-columns: repeat(2, 1fr);
+  &::-webkit-scrollbar {
+    display: none;
   }
 
-  @include up($bp-lg) {
-    grid-template-columns: repeat(3, 1fr);
+  > li {
+    flex: 0 0 86%;
+    scroll-snap-align: start;
+
+    @include up($bp-md) {
+      flex-basis: calc((100% - 20px) / 2);
+    }
+
+    @include up($bp-lg) {
+      flex-basis: calc((100% - 40px) / 3);
+    }
   }
 }
 

@@ -2,7 +2,11 @@
 
 import { useEffect } from "react";
 import { usePathname } from "next/navigation";
-import { setLenis } from "@/lib/scroll";
+import { getLenis, setLenis } from "@/lib/scroll";
+
+// A posição de scroll é restaurada por nós (depois que pins e efeitos existem), não pelo navegador.
+const CHAVE_SCROLL = "scroll-pos";
+let restaurado = false;
 
 /**
  * Motor de animações do site (GSAP + ScrollTrigger + SplitText + Lenis).
@@ -41,7 +45,21 @@ export default function Effects() {
     };
     window.addEventListener("pointermove", onMove, { passive: true });
 
-    if (reduzido) return () => window.removeEventListener("pointermove", onMove);
+    if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+    const salvar = () => {
+      try {
+        sessionStorage.setItem(CHAVE_SCROLL, JSON.stringify({ p: location.pathname, y: window.scrollY }));
+      } catch {
+        /* sem sessionStorage */
+      }
+    };
+    window.addEventListener("pagehide", salvar);
+
+    if (reduzido)
+      return () => {
+        window.removeEventListener("pointermove", onMove);
+        window.removeEventListener("pagehide", salvar);
+      };
 
     let destruir = () => {};
     (async () => {
@@ -66,6 +84,7 @@ export default function Effects() {
 
     return () => {
       window.removeEventListener("pointermove", onMove);
+      window.removeEventListener("pagehide", salvar);
       destruir();
     };
   }, []);
@@ -101,6 +120,7 @@ export default function Effects() {
       const splits: SplitText[] = [];
       const intervals: number[] = [];
       const offs: (() => void)[] = [];
+      const contadores: { el: HTMLElement; iniciar: () => void }[] = [];
 
       const ctx = gsap.context(() => {
         /* ---------- Hero ---------- */
@@ -218,16 +238,18 @@ export default function Effects() {
         });
 
         /* ---------- Cards empilhados ---------- */
+        // O card de trás só encolhe e escurece de leve quando o próximo está quase cobrindo ele
         document.querySelectorAll<HTMLElement>("[data-stack]").forEach((lista) => {
           const cards = Array.from(lista.children) as HTMLElement[];
           cards.forEach((card, i) => {
             const prox = cards[i + 1];
             if (!prox) return;
-            gsap.to(card, {
-              scale: 0.9,
-              filter: "brightness(0.8)",
+            const topoProx = parseFloat(getComputedStyle(prox).top) || 120;
+            gsap.fromTo(card, { scale: 1, "--sombra": 0 }, {
+              scale: 0.94,
+              "--sombra": 0.55,
               ease: "none",
-              scrollTrigger: { trigger: prox, start: "top 85%", end: "top 30%", scrub: true },
+              scrollTrigger: { trigger: prox, start: `top ${topoProx + 220}px`, end: `top ${topoProx}px`, scrub: true },
             });
           });
         });
@@ -240,23 +262,28 @@ export default function Effects() {
           }, 70);
           intervals.push(id);
           const obj = { v: 0 };
+          let iniciado = false;
+          const iniciar = () => {
+            if (iniciado) return;
+            iniciado = true;
+            clearInterval(id);
+            // Lido na hora: o valor pode ter sido atualizado (ex.: números do GitHub ao vivo)
+            const final = Number(el.dataset.count);
+            gsap.to(obj, {
+              v: final,
+              duration: 1.6,
+              ease: "power2.out",
+              onUpdate: () => {
+                el.textContent = String(Math.round(obj.v));
+              },
+            });
+          };
+          contadores.push({ el, iniciar });
           ScrollTrigger.create({
             trigger: el,
             start: "top 88%",
             once: true,
-            onEnter: () => {
-              clearInterval(id);
-              // Lido na hora: o valor pode ter sido atualizado (ex.: números do GitHub ao vivo)
-              const final = Number(el.dataset.count);
-              gsap.to(obj, {
-                v: final,
-                duration: 1.6,
-                ease: "power2.out",
-                onUpdate: () => {
-                  el.textContent = String(Math.round(obj.v));
-                },
-              });
-            },
+            onEnter: iniciar,
           });
         });
 
@@ -324,9 +351,55 @@ export default function Effects() {
       // Recalcula quando as imagens terminarem de carregar
       const imgs = Array.from(document.images).filter((i) => !i.complete);
       let pendentes = imgs.length;
-      const refresh = () => --pendentes <= 0 && ScrollTrigger.refresh();
+      const refresh = () => {
+        if (--pendentes <= 0) {
+          ScrollTrigger.refresh();
+          sincronizar();
+        }
+      };
       imgs.forEach((i) => i.addEventListener("load", refresh, { once: true }));
-      requestAnimationFrame(() => ScrollTrigger.refresh());
+      /**
+       * Rede de segurança: tudo que já está na tela (ou acima dela) aparece, mesmo que
+       * a animação de entrada não tenha disparado (ex.: recarregar no meio da página).
+       */
+      const sincronizar = () => {
+        const limite = window.innerHeight * 0.95;
+        document.querySelectorAll<HTMLElement>("[data-reveal]").forEach((el) => {
+          if (Number(getComputedStyle(el).opacity) < 0.05 && el.getBoundingClientRect().top < limite)
+            gsap.to(el, { opacity: 1, y: 0, duration: 0.6, ease: "power3.out", overwrite: true });
+        });
+        splits.forEach((sp) => {
+          const alvo = (sp.elements?.[0] as HTMLElement | undefined) ?? null;
+          if (alvo && alvo.getBoundingClientRect().top < limite)
+            gsap.to(sp.words, { yPercent: 0, duration: 0.6, ease: "power3.out", overwrite: true });
+        });
+        contadores.forEach((c) => c.el.getBoundingClientRect().top < limite && c.iniciar());
+      };
+
+      requestAnimationFrame(() => {
+        ScrollTrigger.refresh();
+        // Só no primeiro carregamento: volta para onde a pessoa estava antes de recarregar
+        if (!restaurado) {
+          restaurado = true;
+          try {
+            const salvo = JSON.parse(sessionStorage.getItem(CHAVE_SCROLL) || "null");
+            if (salvo && salvo.p === location.pathname && salvo.y > 0) {
+              const lenis = getLenis();
+              if (lenis) {
+                lenis.resize(); // atualiza a altura conhecida da página (pins já criados)
+                lenis.scrollTo(salvo.y, { immediate: true, force: true });
+              }
+              else window.scrollTo(0, salvo.y);
+              ScrollTrigger.update();
+            }
+          } catch {
+            /* ok */
+          }
+        }
+        requestAnimationFrame(sincronizar);
+      });
+      window.addEventListener("load", sincronizar, { once: true });
+      offs.push(() => window.removeEventListener("load", sincronizar));
 
       limpar = () => {
         intervals.forEach(clearInterval);
