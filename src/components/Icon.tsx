@@ -17,6 +17,15 @@ import {
   siSass,
   siTypescript,
   siWhatsapp,
+  siVite,
+  siTailwindcss,
+  siNodedotjs,
+  siFastify,
+  siVitest,
+  siReactquery,
+  siZod,
+  siNetlify,
+  siPocketbase,
 } from "simple-icons";
 
 type SimpleIcon = { path: string; hex: string };
@@ -40,6 +49,15 @@ const marcas: Record<string, SimpleIcon> = {
   instagram: siInstagram,
   whatsapp: siWhatsapp,
   gmail: siGmail,
+  vite: siVite,
+  tailwind: siTailwindcss,
+  node: siNodedotjs,
+  fastify: siFastify,
+  vitest: siVitest,
+  tanstack: siReactquery,
+  zod: siZod,
+  netlify: siNetlify,
+  pocketbase: siPocketbase,
 };
 
 /** Ícones de traço (24×24, stroke = currentColor) para o que não é marca. */
@@ -68,6 +86,12 @@ const tracos: Record<string, string> = {
   briefcase: "M4 8h16v11H4V8Zm5 0V5h6v3M4 13h16",
   cap: "M2 9l10-5 10 5-10 5L2 9Zm4 2v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5M22 9v6",
   quote: "M9 7H5v6h4v-2c0 2-1 4-3 5m13-9h-4v6h4v-2c0 2-1 4-3 5",
+  api: "M4 12h4m8 0h4M8 8l-4 4 4 4m8-8 4 4-4 4M10 18l4-12",
+  audio: "M4 10v4h4l5 4V6L8 10H4Zm12-1a4 4 0 0 1 0 6m2.5-8.5a7.5 7.5 0 0 1 0 11",
+  commit: "M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3 12h6m6 0h6",
+  repo: "M5 4h11a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3V4Zm0 13a3 3 0 0 1 3-3h11",
+  star: "M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9L12 3Z",
+  users: "M16 20v-1.5a3.5 3.5 0 0 0-3.5-3.5h-5A3.5 3.5 0 0 0 4 18.5V20m16 0v-1.5a3.5 3.5 0 0 0-2.5-3.35M10 11a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7Zm5.5-6.85a3.5 3.5 0 0 1 0 6.7",
 };
 
 type Props = { name: string; size?: number; title?: string; className?: string; brandColor?: boolean };

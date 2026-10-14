@@ -5,149 +5,105 @@
   padding: 0;
   margin: 0;
   display: grid;
-  gap: 24px;
-
-  @include up($bp-sm) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @include up($bp-lg) {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  gap: clamp(72px, 12vw, 160px);
 }
 
-.card {
-  @include card;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-  transition: border-color 0.3s ease, transform 0.3s var(--ease-out), box-shadow 0.3s ease;
+.item {
+  display: grid;
+  gap: 32px;
+  align-items: center;
 
-  &:hover {
-    border-color: var(--accent);
-    transform: translateY(-6px);
-    box-shadow: var(--shadow-md);
+  @include up($bp-md) {
+    grid-template-columns: 1.25fr 1fr;
+    gap: 56px;
 
-    .bannerImg img {
-      transform: scale(1.06);
-    }
+    &:nth-child(even) {
+      grid-template-columns: 1fr 1.25fr;
 
-    .abrir {
-      opacity: 1;
-      transform: translateY(0);
+      .banner {
+        order: 2;
+      }
     }
   }
 }
 
 .banner {
-  position: relative;
   display: block;
-  border-bottom: 1px solid var(--border);
-}
-
-.bannerImg {
   aspect-ratio: 16 / 10;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     object-position: top;
-    transition: transform 0.6s var(--ease-out), opacity 0.4s ease !important;
+    transform-origin: center top;
   }
 }
 
-.abrir {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  display: grid;
-  place-items: center;
-  width: 38px;
-  height: 38px;
-  border-radius: 50%;
-  background: var(--surface);
-  color: var(--primary);
-  box-shadow: var(--shadow-md);
-  opacity: 0;
-  transform: translateY(-6px);
-  transition: opacity 0.3s ease, transform 0.3s var(--ease-out);
-}
-
-.corpo {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  flex: 1;
-  padding: 22px 22px 24px;
-
-  h3 {
-    font-size: 1.25rem;
+.info {
+  h2 {
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    letter-spacing: -0.045em;
+    margin-top: 8px;
   }
 
   > p {
+    margin-top: 16px;
     color: var(--text-muted);
-    font-size: 0.95rem;
+    font-size: 1.075rem;
+    max-width: 46ch;
   }
+}
+
+.num {
+  @include mono;
+  display: inline-block;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--accent);
 }
 
 .stacks {
   list-style: none;
   padding: 0;
-  margin: 0;
+  margin: 20px 0 0;
   display: flex;
   flex-wrap: wrap;
-  gap: 6px;
+  gap: 8px;
 
   li {
     @include mono;
     display: inline-flex;
     align-items: center;
     gap: 6px;
-    padding: 4px 10px;
+    padding: 6px 12px;
     border-radius: 999px;
     background: var(--surface-2);
-    font-size: 0.75rem;
+    border: 1px solid var(--border);
+    font-size: 0.78rem;
     font-weight: 600;
     color: var(--text-muted);
   }
 }
 
 .links {
-  margin-top: auto;
-  padding-top: 8px;
   display: flex;
-  gap: 18px;
-
-  a {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    font-weight: 600;
-    font-size: 0.925rem;
-    color: var(--primary);
-    text-decoration: none;
-
-    &:hover {
-      text-decoration: underline;
-      text-underline-offset: 4px;
-    }
-  }
-}
-
-.destaque {
-  /* projetos em destaque ganham borda de acento */
-  border-top: 3px solid var(--primary);
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
 }
 
 .comoFeito {
-  margin-top: 56px;
-  padding: clamp(24px, 4vw, 40px);
-  border-radius: var(--radius-lg);
-  background: var(--text);
-  color: var(--bg);
+  padding: clamp(28px, 5vw, 56px) !important;
+  border-radius: 28px;
+  background: #0b0f0c;
+  color: #eef2ec;
   display: grid;
-  gap: 28px;
+  gap: 32px;
 
   @include up($bp-md) {
     grid-template-columns: 0.7fr 1.3fr;
@@ -163,18 +119,17 @@
 
   :global([data-theme="dark"]) & {
     background: var(--surface);
-    color: var(--text);
     border: 1px solid var(--border);
   }
 
-  h3 {
-    font-size: clamp(1.5rem, 3vw, 2rem);
+  h2 {
+    font-size: clamp(1.75rem, 3.4vw, 2.5rem);
   }
 
   dl {
     margin: 0;
     display: grid;
-    gap: 18px;
+    gap: 22px;
 
     @include up($bp-sm) {
       grid-template-columns: repeat(2, 1fr);
@@ -189,8 +144,33 @@
   }
 
   dd {
-    margin: 4px 0 0;
-    font-size: 0.925rem;
-    opacity: 0.82;
+    margin: 6px 0 0;
+    font-size: 0.95rem;
+    color: #c8cfc9;
+  }
+}
+
+.destaques {
+  list-style: none;
+  padding: 0;
+  margin: 18px 0 0;
+  display: grid;
+  gap: 8px;
+  font-size: 0.95rem;
+
+  li {
+    position: relative;
+    padding-left: 26px;
+
+    &::before {
+      content: "=>";
+      position: absolute;
+      left: 0;
+      top: 0.05em;
+      font-family: var(--font-mono), monospace;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
   }
 }

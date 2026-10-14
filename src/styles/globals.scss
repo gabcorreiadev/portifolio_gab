@@ -146,7 +146,7 @@ button {
   gap: 8px;
   font-size: 0.8125rem;
   font-weight: 600;
-  color: var(--primary);
+  color: var(--primary-strong);
   letter-spacing: 0.04em;
   margin-bottom: 14px;
 
@@ -280,4 +280,283 @@ button {
   .js [data-reveal] {
     opacity: 1;
   }
+}
+
+/* ===================================================================
+   Efeitos visuais (v2)
+   =================================================================== */
+
+/* Lenis */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* Linhas do SplitText com máscara */
+.split-line {
+  padding-bottom: 0.08em;
+  margin-bottom: -0.08em;
+}
+
+/* Aurora (fundo animado em gradiente) */
+.aurora {
+  position: absolute;
+  inset: -20% -10% auto;
+  height: 120%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 0;
+  filter: blur(70px) saturate(130%);
+  opacity: 0.55;
+
+  :root[data-theme="dark"] & {
+    opacity: 0.45;
+  }
+
+  span {
+    position: absolute;
+    border-radius: 50%;
+    mix-blend-mode: normal;
+    animation: aurora 18s ease-in-out infinite alternate;
+  }
+
+  span:nth-child(1) {
+    width: 46vw;
+    height: 46vw;
+    left: 45%;
+    top: 0;
+    background: radial-gradient(circle, rgba(34, 197, 94, 0.55), transparent 65%);
+  }
+
+  span:nth-child(2) {
+    width: 38vw;
+    height: 38vw;
+    left: 62%;
+    top: 30%;
+    background: radial-gradient(circle, rgba(163, 230, 53, 0.45), transparent 65%);
+    animation-duration: 22s;
+    animation-delay: -6s;
+  }
+
+  span:nth-child(3) {
+    width: 34vw;
+    height: 34vw;
+    left: 20%;
+    top: 40%;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.35), transparent 65%);
+    animation-duration: 26s;
+    animation-delay: -12s;
+  }
+}
+
+@keyframes aurora {
+  0% {
+    transform: translate(0, 0) scale(1);
+  }
+  50% {
+    transform: translate(-8vw, 6vh) scale(1.15);
+  }
+  100% {
+    transform: translate(6vw, -4vh) scale(0.95);
+  }
+}
+
+/* Texto com brilho em gradiente que percorre a palavra */
+.shine {
+  background: linear-gradient(100deg, var(--primary) 20%, var(--accent) 40%, var(--primary) 60%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+  animation: shine 6s linear infinite;
+}
+
+@keyframes shine {
+  to {
+    background-position: -220% 0;
+  }
+}
+
+/* Spotlight que segue o cursor */
+[data-spot] {
+  position: relative;
+  isolation: isolate;
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(420px circle at var(--mx, 50%) var(--my, 50%), var(--glow), transparent 45%);
+    transition: opacity 0.35s ease;
+    z-index: -1;
+  }
+
+  &:hover::after {
+    opacity: 0.7;
+  }
+}
+
+/* Marquee infinito */
+.marquee {
+  display: flex;
+  overflow: hidden;
+  user-select: none;
+  mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+
+  &:hover .marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+.marquee-track {
+  display: flex;
+  flex-shrink: 0;
+  gap: 16px;
+  padding-right: 16px;
+  min-width: 100%;
+  animation: marquee 38s linear infinite;
+
+  .marquee-reverse & {
+    animation-direction: reverse;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-100%);
+  }
+}
+
+/* Cabeçalho de página interna */
+.page-header {
+  position: relative;
+  overflow: hidden;
+  padding: calc(var(--header-h) + 72px) 0 64px;
+
+  @include up($bp-md) {
+    padding: calc(var(--header-h) + 110px) 0 96px;
+  }
+
+  .container {
+    position: relative;
+    z-index: 1;
+  }
+
+  h1 {
+    font-size: clamp(2.75rem, 8vw, 6.5rem);
+    letter-spacing: -0.045em;
+    line-height: 0.98;
+    max-width: 14ch;
+  }
+
+  .lead {
+    margin-top: 24px;
+    max-width: 560px;
+    font-size: clamp(1.05rem, 1.6vw, 1.25rem);
+    color: var(--text-muted);
+  }
+
+  .acoes {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+}
+
+/* Transição entre páginas */
+.page-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 900;
+  pointer-events: none;
+  background: var(--primary);
+  transform-origin: top;
+  animation: curtain 0.75s cubic-bezier(0.76, 0, 0.24, 1) both;
+
+  &::after {
+    content: "=>";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    font-family: var(--font-mono), monospace;
+    font-size: 2.5rem;
+    font-weight: 600;
+    color: var(--on-primary);
+  }
+}
+
+@keyframes curtain {
+  from {
+    transform: scaleY(1);
+  }
+  to {
+    transform: scaleY(0);
+  }
+}
+
+.page-enter {
+  animation: pageEnter 0.8s 0.25s var(--ease-out) both;
+}
+
+@keyframes pageEnter {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+/* CTA final reutilizável */
+.cta-final {
+  text-align: center;
+
+  h2 {
+    font-size: clamp(2.25rem, 6vw, 4.5rem);
+    letter-spacing: -0.04em;
+    max-width: 16ch;
+    margin-inline: auto;
+  }
+
+  p {
+    margin: 18px auto 0;
+    max-width: 520px;
+    color: var(--text-muted);
+  }
+
+  .acoes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 32px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora span,
+  .marquee-track,
+  .shine {
+    animation: none !important;
+  }
+
+  .page-curtain {
+    display: none;
+  }
+}
+
+html.menu-aberto {
+  overflow: hidden;
 }

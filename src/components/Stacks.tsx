@@ -6,10 +6,10 @@ export default function Stacks() {
   return (
     <section id="stacks" className={`section ${styles.secao}`} aria-labelledby="stacks-titulo">
       <div className="container">
-        <div className="section-head" data-reveal>
-          <p className="eyebrow">Stacks</p>
-          <h2 id="stacks-titulo">Ferramentas do dia a dia</h2>
-          <p>Do protótipo no Figma ao deploy na AWS, com acessibilidade em todo o caminho.</p>
+        <div className="section-head">
+          <p className="eyebrow" data-reveal>Stacks</p>
+          <h2 id="stacks-titulo" data-split>Ferramentas do dia a dia</h2>
+          <p data-reveal>Do protótipo no Figma ao deploy na AWS, com acessibilidade em todo o caminho.</p>
         </div>
 
         <div className={styles.grupos}>
@@ -18,7 +18,7 @@ export default function Stacks() {
               <h3><code>{"// "}</code>{g.titulo}</h3>
               <ul>
                 {g.itens.map((s) => (
-                  <li key={s.id} className={styles.item} data-reveal>
+                  <li key={s.id} className={styles.item} data-reveal data-spot>
                     <Icon name={s.id} size={28} brandColor />
                     <span>{s.nome}</span>
                   </li>

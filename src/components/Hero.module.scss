@@ -20,8 +20,26 @@
   pointer-events: none;
 }
 
+.bgText {
+  position: absolute;
+  left: 0;
+  bottom: 9%;
+  z-index: 0;
+  white-space: nowrap;
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(5rem, 13vw, 12rem);
+  letter-spacing: -0.05em;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1px color-mix(in srgb, var(--text) 12%, transparent);
+  pointer-events: none;
+  user-select: none;
+}
+
 .inner {
   position: relative;
+  z-index: 1;
   display: grid;
   gap: 40px;
   align-items: center;

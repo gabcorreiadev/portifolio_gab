@@ -18,12 +18,30 @@ export const perfil = {
   github: "https://github.com/gabcorreiadev",
   instagram: "https://www.instagram.com/gabcorreia",
   /** Caminho do currículo em PDF dentro de /public. Deixe null enquanto o PDF não existir. */
-  curriculo: null as string | null,
+  curriculo: "/cv/curriculo-gabriel-correia-reis.pdf" as string | null,
   foto: "/img/hero/gabriel.webp",
 };
 
 export const whatsappUrl = () =>
   `https://wa.me/${perfil.whatsapp.numero}?text=${encodeURIComponent(perfil.whatsapp.mensagem)}`;
+
+export const navegacao = [
+  { href: "/", label: "Início" },
+  { href: "/sobre/", label: "Sobre" },
+  { href: "/trajetoria/", label: "Trajetória" },
+  { href: "/projetos/", label: "Projetos" },
+  { href: "/contato/", label: "Contato" },
+];
+
+export const softSkills = [
+  "Aprendizado contínuo",
+  "Trabalho em equipe",
+  "Comunicação assertiva",
+  "Resolução de problemas",
+  "Adaptabilidade",
+];
+
+export const conceitos = ["Clean Code", "APIs REST", "Componentização", "Metodologias Ágeis (Kanban)"];
 
 export const resumo = [
   "Sou Desenvolvedor Front-End e comecei na tecnologia em 2023, aos 18 anos, no curso de Web Design Front-End do SENAI. Ali descobri minha vocação: construir interfaces que unem bom design e código bem feito.",

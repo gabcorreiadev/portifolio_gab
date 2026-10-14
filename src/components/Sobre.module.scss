@@ -1,32 +1,23 @@
 @use "../styles/mixins" as *;
 
-.topo {
+.headerGrid {
   display: grid;
-  gap: 8px 64px;
+  gap: 48px;
+  align-items: center;
 
   @include up($bp-md) {
-    grid-template-columns: 0.8fr 1.2fr;
-  }
-}
-
-.resumo {
-  display: grid;
-  gap: 16px;
-  color: var(--text-muted);
-  font-size: 1.0625rem;
-
-  p:first-child {
-    color: var(--text);
-    font-size: 1.2rem;
+    grid-template-columns: 1.15fr 0.85fr;
   }
 }
 
 .meta {
   @include mono;
   display: flex;
-  gap: 18px;
-  font-size: 0.875rem !important;
-  color: var(--primary) !important;
+  flex-wrap: wrap;
+  gap: 8px 18px;
+  margin-top: 24px;
+  font-size: 0.85rem;
+  color: var(--primary);
 
   span::before {
     content: "// ";
@@ -34,124 +25,218 @@
   }
 }
 
-.numeros {
-  list-style: none;
-  padding: 0;
-  margin: 64px 0 0;
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 16px;
+.foto {
+  border-radius: 20px;
+  overflow: hidden;
+  aspect-ratio: 4 / 5;
+  max-width: 480px;
+  justify-self: center;
+  width: 100%;
+  box-shadow: var(--shadow-md);
 
-  @include up($bp-md) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  li {
-    @include card;
-    padding: 24px;
-    display: grid;
-    gap: 4px;
-    transition: border-color 0.25s ease, transform 0.25s var(--ease-out);
-
-    &:hover {
-      border-color: var(--accent);
-      transform: translateY(-4px);
-    }
-  }
-
-  strong {
-    @include mono;
-    font-size: clamp(2.25rem, 5vw, 3.25rem);
-    line-height: 1;
-    color: var(--primary);
-    font-variant-numeric: tabular-nums;
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 }
 
-.label {
-  font-weight: 600;
-  margin-top: 8px;
+.resumoGrande {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(1.6rem, 3.6vw, 3rem);
+  line-height: 1.2;
+  letter-spacing: -0.025em;
+  max-width: 26ch;
 }
 
-.detalhe {
-  font-size: 0.8125rem;
+.resumoTexto {
+  margin-top: 40px;
+  margin-left: auto;
+  max-width: 560px;
+  font-size: 1.125rem;
   color: var(--text-muted);
 }
 
-.subtitulo {
-  margin: 80px 0 24px;
-  font-size: 1.5rem;
+.como {
+  background: var(--surface-2);
+  border-block: 1px solid var(--border);
 }
 
-.curiosidades {
+.comoGrid {
+  display: grid;
+  gap: 40px;
+
+  @include up($bp-md) {
+    grid-template-columns: 1.3fr 1fr;
+  }
+
+  h3 {
+    font-size: 1.15rem;
+    margin-bottom: 18px;
+  }
+}
+
+.skills {
   list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
-  gap: 16px;
-
-  @include up($bp-sm) {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  @include up($bp-md) {
-    grid-template-columns: repeat(3, 1fr);
-  }
+  gap: 10px;
 
   li {
     @include card;
-    padding: 20px;
+    overflow: hidden;
     display: flex;
-    gap: 16px;
-    align-items: flex-start;
+    align-items: center;
+    gap: 18px;
+    padding: 18px 22px;
+    font-family: var(--font-display);
+    font-size: clamp(1.15rem, 2vw, 1.5rem);
+    font-weight: 500;
+    transition: transform 0.3s var(--ease-out), border-color 0.3s ease;
+
+    &:hover {
+      transform: translateX(8px);
+      border-color: var(--primary);
+    }
+  }
+}
+
+.skillNum {
+  @include mono;
+  font-size: 0.8rem;
+  color: var(--accent);
+}
+
+.tags {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+
+  li {
+    @include mono;
+    padding: 12px 18px;
+    border-radius: 999px;
+    border: 1px dashed var(--primary);
+    color: var(--primary-strong);
+    font-size: 0.9rem;
+    font-weight: 600;
+  }
+}
+
+/* Cards empilhados */
+.alem {
+  display: grid;
+  gap: 48px;
+
+  @include up($bp-md) {
+    grid-template-columns: 0.8fr 1.2fr;
+    align-items: start;
+  }
+}
+
+.alemHead {
+  @include up($bp-md) {
+    position: sticky;
+    top: calc(var(--header-h) + 48px);
   }
 
-  h4 {
-    font-size: 1.0625rem;
-    margin-bottom: 4px;
+  h2 {
+    font-size: clamp(2rem, 4vw, 2.75rem);
+  }
+
+  p:last-child {
+    margin-top: 12px;
+    color: var(--text-muted);
+  }
+}
+
+.stack {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 24px;
+}
+
+.stackCard {
+  @include card;
+  position: sticky;
+  top: calc(var(--header-h) + 32px + var(--i) * 14px);
+  min-height: 260px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  transform-origin: center top;
+  background: var(--surface);
+  box-shadow: var(--shadow-md);
+
+  &:nth-child(odd) {
+    background: radial-gradient(ellipse at top right, color-mix(in srgb, var(--primary) 14%, transparent), transparent 60%),
+      var(--surface);
+  }
+
+  h3 {
+    margin-top: auto;
+    font-size: clamp(1.8rem, 3.5vw, 2.5rem);
+    letter-spacing: -0.03em;
   }
 
   p {
+    margin-top: 8px;
     color: var(--text-muted);
-    font-size: 0.95rem;
+    font-size: 1.05rem;
   }
 }
 
-.icone {
+.stackIcone {
   display: grid;
   place-items: center;
-  flex-shrink: 0;
-  width: 44px;
-  height: 44px;
+  width: 60px;
+  height: 60px;
   border-radius: var(--radius-md);
-  background: color-mix(in srgb, var(--primary) 12%, transparent);
+  background: color-mix(in srgb, var(--primary) 14%, transparent);
   color: var(--primary);
 }
 
+.stackNum {
+  @include mono;
+  position: absolute;
+  top: 32px;
+  right: 32px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* Versículo */
 .versiculo {
   position: relative;
-  margin: 64px 0 0;
-  padding: 40px clamp(24px, 5vw, 56px);
-  border-radius: var(--radius-lg);
-  background: radial-gradient(ellipse at top right, color-mix(in srgb, var(--primary) 18%, transparent), transparent 60%),
+  margin: 0;
+  padding: clamp(32px, 6vw, 72px) clamp(24px, 5vw, 56px);
+  border-radius: 28px;
+  background: radial-gradient(ellipse at top right, color-mix(in srgb, var(--primary) 20%, transparent), transparent 60%),
     var(--surface);
   border: 1px solid var(--border);
   text-align: center;
 
   blockquote {
-    margin: 12px auto 0;
+    margin: 14px auto 0;
     max-width: 760px;
 
     p {
       font-family: var(--font-display);
-      font-size: clamp(1.15rem, 2.4vw, 1.5rem);
-      line-height: 1.5;
+      font-size: clamp(1.25rem, 2.6vw, 1.75rem);
+      line-height: 1.45;
     }
   }
 
   figcaption {
     @include mono;
-    margin-top: 16px;
+    margin-top: 18px;
     color: var(--primary);
     font-size: 0.9rem;
     font-weight: 600;
@@ -169,4 +254,9 @@
   text-transform: uppercase;
   letter-spacing: 0.08em;
   color: var(--text-muted);
+}
+
+.header {
+  /* hook para ajustes futuros */
+  isolation: isolate;
 }

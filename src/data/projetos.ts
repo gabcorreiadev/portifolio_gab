@@ -2,6 +2,8 @@ export type Projeto = {
   slug: string;
   nome: string;
   descricao: string;
+  /** Pontos fortes tirados do README de cada repositório. */
+  destaques?: string[];
   /** Ids de src/data/stacks.ts */
   stacks: string[];
   url: string;
@@ -10,15 +12,22 @@ export type Projeto = {
   destaque?: boolean;
 };
 
-// Stacks dos projetos marcados com TODO ainda precisam ser confirmadas no repositório.
+// Stacks e destaques conferidos nos READMEs de github.com/gabcorreiadev (out/2026).
 export const projetos: Projeto[] = [
   {
     slug: "box-na-veia",
     nome: "Box na Veia",
     descricao:
-      "Portal de Fórmula 1 com a próxima corrida, onde assistir, história da categoria e os grandes pilotos. Layout animado, com destaque para os brasileiros e experiência mobile caprichada.",
-    stacks: ["html", "css", "javascript"], // TODO: confirmar
+      "Guia diário de Fórmula 1 em português: próxima corrida com contagem regressiva e onde assistir no Brasil, classificação do campeonato, lendas da categoria e glossário.",
+    destaques: [
+      "Dados ao vivo da API Jolpica-F1 (calendário, resultados e classificação)",
+      "Som de largada gerado no navegador com Web Audio API",
+      "Calendário .ics com lembrete 1 h antes de cada corrida",
+      "SEO com renderização no servidor, imagens de compartilhamento e schema.org",
+    ],
+    stacks: ["nextjs", "typescript", "netlify"],
     url: "https://boxnaveia.netlify.app/",
+    repo: "https://github.com/gabcorreiadev/boxdiario",
     banner: "/img/projetos/box-na-veia.webp",
     destaque: true,
   },
@@ -26,9 +35,16 @@ export const projetos: Projeto[] = [
     slug: "tracker-estreias",
     nome: "Tracker de Estreias",
     descricao:
-      "Catálogo de estreias de cinema, com filmes e elenco. Explora o consumo assíncrono de API, infinite scroll, skeletons e filtros dinâmicos.",
-    stacks: ["html", "css", "javascript"], // TODO: confirmar
+      "Catálogo das estreias de cinema no Brasil, com filtros, elenco, trailers, listas pessoais e agenda de sessões. Front-end em React e um BFF próprio em Node.js.",
+    destaques: [
+      "BFF com Fastify, validação com Zod e cache em memória",
+      "TanStack Query no front e testes com Vitest e MSW",
+      "Agenda exporta .ics; listas salvas no navegador, sem banco",
+      "Dados do TMDB, com modo mock que roda sem token",
+    ],
+    stacks: ["react", "typescript", "vite", "tailwind", "tanstack", "node", "fastify", "zod", "vitest"],
     url: "https://trackerestreias.netlify.app/",
+    repo: "https://github.com/gabcorreiadev/tracker",
     banner: "/img/projetos/tracker-estreias.webp",
     destaque: true,
   },
@@ -36,18 +52,31 @@ export const projetos: Projeto[] = [
     slug: "anil-jeans",
     nome: "Anil Jeans",
     descricao:
-      "Loja de moda jeans levada do protótipo no Figma para o código. Inclui carrinho de compras e animações que fogem do padrão de e-commerce.",
-    stacks: ["figma", "html", "css", "javascript"], // TODO: confirmar
+      "Loja de jeans levada do protótipo no Figma para o código, sem framework: vitrine com filtros e busca, página de produto, favoritos, conta de usuário e checkout em 3 etapas.",
+    destaques: [
+      "Carrinho em gaveta com visual de cupom fiscal e cupons de desconto",
+      "Contas de usuário com PocketBase",
+      "Frete simulado por CEP e frete grátis acima de um valor",
+      "Animações que respeitam o movimento reduzido",
+    ],
+    stacks: ["figma", "vite", "typescript", "sass", "pocketbase"],
     url: "https://aniljeans.netlify.app/",
+    repo: "https://github.com/gabcorreiadev/aniljeans",
     banner: "/img/projetos/anil-jeans.webp",
   },
   {
     slug: "new-burger",
     nome: "New Burger",
     descricao:
-      "Site de hamburgueria desenhado primeiro no Figma e depois implementado em código. Mostra o fluxo completo de design para front-end.",
-    stacks: ["figma", "html", "sass", "typescript"],
+      "Landing page de hamburgueria desenhada primeiro no Figma e depois implementada em código, com cardápio, promoções e painel de pedidos.",
+    destaques: [
+      "Painel lateral de pedido: adicionar, ajustar quantidades e enviar por e-mail",
+      "Cardápio renderizado a partir de um arquivo de dados",
+      "Header fixo com menu mobile e seção atual destacada",
+    ],
+    stacks: ["figma", "vite", "typescript", "sass"],
     url: "https://timenewburger.netlify.app/",
+    repo: "https://github.com/gabcorreiadev/newburger",
     banner: "/img/projetos/new-burger.webp",
   },
   {

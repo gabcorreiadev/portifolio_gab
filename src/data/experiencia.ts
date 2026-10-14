@@ -76,3 +76,31 @@ export const trajetoria: ItemTrajetoria[] = [
 ];
 
 export const empresas = ["Be.Aliant", "Revizia", "Paynet"] as const;
+
+/** Marcos por ano usados no "ano gigante" da página Trajetória. */
+export const marcos = [
+  {
+    ano: 2023,
+    titulo: "O começo",
+    texto:
+      "Web Design Front-End no SENAI e a primeira vaga: Front-End / UX Designer na Paynet, com protótipos no Figma e código integrado a APIs REST.",
+  },
+  {
+    ano: 2024,
+    titulo: "Engenharia de produto",
+    texto:
+      "Entrada na Revizia, numa plataforma SaaS tributária, e início do Tecnólogo em Sistemas para Internet na Estácio.",
+  },
+  {
+    ano: 2025,
+    titulo: "Design e nuvem",
+    texto:
+      "Formação em Design UX/UI e AWS Academy Cloud Foundations no SENAI, fechando o ciclo na Revizia.",
+  },
+  {
+    ano: 2026,
+    titulo: "Be.Aliant",
+    texto:
+      "Desenvolvedor Front-End Jr em plataformas de compliance e canais de denúncia, com WCAG e deploy na AWS. Conclusão do tecnólogo prevista para dezembro.",
+  },
+];

@@ -1,6 +1,10 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, JetBrains_Mono, Space_Grotesk } from "next/font/google";
 import { perfil } from "@/data/perfil";
+import Header from "@/components/Header";
+import Footer from "@/components/Footer";
+import Loader from "@/components/Loader";
+import Effects from "@/components/Effects";
 import "@/styles/globals.scss";
 
 const display = Space_Grotesk({ subsets: ["latin"], weight: ["500", "700"], variable: "--font-display", display: "swap" });
@@ -13,7 +17,7 @@ const descricao =
 
 export const metadata: Metadata = {
   metadataBase: new URL(perfil.site),
-  title: titulo,
+  title: { default: titulo, template: `%s · ${perfil.nome}` },
   description: descricao,
   authors: [{ name: perfil.nome, url: perfil.site }],
   alternates: { canonical: "/" },
@@ -22,7 +26,7 @@ export const metadata: Metadata = {
     locale: "pt_BR",
     url: perfil.site,
     siteName: perfil.nome,
-    title: titulo,
+    title: { default: titulo, template: `%s · ${perfil.nome}` },
     description: descricao,
     images: [{ url: "/og.png", width: 1200, height: 630, alt: perfil.nome }],
   },
@@ -64,7 +68,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       </head>
       <body>
         <a className="skip-link" href="#conteudo">Pular para o conteúdo</a>
-        {children}
+        <Loader />
+        <Header />
+        <main id="conteudo">{children}</main>
+        <Footer />
+        <Effects />
       </body>
     </html>
   );

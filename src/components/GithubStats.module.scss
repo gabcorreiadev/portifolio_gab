@@ -1,0 +1,83 @@
+@use "../styles/mixins" as *;
+
+.box {
+  @include card;
+  overflow: hidden;
+  padding: clamp(24px, 4vw, 44px);
+  background: radial-gradient(ellipse at top left, color-mix(in srgb, var(--primary) 14%, transparent), transparent 55%),
+    var(--surface);
+}
+
+.topo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px 20px;
+
+  h2 {
+    font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+  }
+
+  :global(.eyebrow) {
+    margin-bottom: 6px;
+  }
+
+  :global(.btn) {
+    margin-left: auto;
+  }
+}
+
+.logo {
+  display: grid;
+  place-items: center;
+  width: 56px;
+  height: 56px;
+  border-radius: 16px;
+  background: var(--text);
+  color: var(--bg);
+}
+
+.grid {
+  list-style: none;
+  padding: 0;
+  margin: 32px 0 0;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px 16px;
+
+  @include up($bp-md) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  li {
+    display: grid;
+    gap: 4px;
+    padding-left: 16px;
+    border-left: 2px solid var(--border);
+  }
+
+  strong {
+    @include mono;
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    line-height: 1;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+
+}
+
+.label {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.icone {
+  color: var(--primary);
+  margin-bottom: 6px;
+}
+
+.nota {
+  margin-top: 24px;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}

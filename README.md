@@ -1,8 +1,8 @@
 # Portfólio — Gabriel Correia Reis
 
-Site pessoal de página única publicado em **gabcorreia.com.br**.
+Site pessoal publicado em **gabcorreia.com.br**, com cinco páginas: Início, Sobre, Trajetória, Projetos e Contato.
 
-**Stack:** Next.js 15 (App Router, export estático) · TypeScript · SCSS Modules · GSAP + ScrollTrigger · Simple Icons · Netlify
+**Stack:** Next.js 15 (App Router, export estático) · TypeScript · SCSS Modules · GSAP (ScrollTrigger + SplitText) · Lenis · Simple Icons · Netlify
 
 ## Rodar localmente
 
@@ -26,10 +26,25 @@ Tudo fica em `src/data/` — não é preciso mexer nos componentes.
 | `projetos.ts` | cards de projeto |
 | `depoimentos.ts` | depoimentos (o card só aparece quando `texto` estiver preenchido) |
 | `versiculos.ts` | versículo do dia (NAA) |
+| `github.ts` | números do GitHub (fallback) |
 
 Imagens ficam em `public/img/` (`hero/`, `projetos/`, `depoimentos/`). Use WebP; depoimentos em 400×400.
 
-**Currículo em PDF:** coloque o arquivo em `public/cv/curriculo-gabriel-correia-reis.pdf` e preencha `curriculo` em `perfil.ts` — o botão aparece sozinho no hero.
+**Currículo em PDF:** fica em `public/cv/curriculo-gabriel-correia-reis.pdf`. Para atualizar, é só substituir o arquivo mantendo o nome. Ele aparece no header (CV), no hero, no menu mobile, nas páginas Sobre, Trajetória e Contato, nos CTAs e no rodapé.
+
+## Páginas
+
+| Rota | Arquivo | Conteúdo |
+| --- | --- | --- |
+| `/` | `src/app/page.tsx` | Hero, manifesto, marquee de stacks, números, galeria horizontal de projetos, atalhos para as páginas |
+| `/sobre/` | `src/app/sobre/page.tsx` | Resumo, soft skills, stacks, curiosidades em cards empilhados, versículo |
+| `/trajetoria/` | `src/app/trajetoria/page.tsx` | Ano gigante por marco, experiência, formação |
+| `/projetos/` | `src/app/projetos/page.tsx` | Destaques (`destaque: true`) em blocos grandes; o resto em cards com filtro por tecnologia; GitHub em números; bastidores |
+| `/contato/` | `src/app/contato/page.tsx` | Canais, mensagem pronta (WhatsApp/e-mail), currículo |
+
+## Efeitos
+
+Os efeitos ficam todos em `src/components/Effects.tsx` e são ligados por atributos no HTML, por exemplo `data-split` (título entra palavra por palavra), `data-fill` (texto acende no scroll), `data-zoom` (imagem abre de um recorte), `data-hscroll` (galeria horizontal fixa), `data-stack` (cards empilhados) e `data-magnetic` (botão segue o cursor). A lista completa está no comentário no topo do arquivo. Com "reduzir movimento" ativo no sistema, nada anima.
 
 ## Deploy na Netlify
 
@@ -39,8 +54,9 @@ Imagens ficam em `public/img/` (`hero/`, `projetos/`, `depoimentos/`). Use WebP;
 
 ## Pendências (TODO no código)
 
-- Confirmar as stacks de Box na Veia, Tracker de Estreias e Anil Jeans; adicionar links de repositório.
+- Atualizar `contribuicoes` em `src/data/github.ts` de tempos em tempos (repositórios e seguidores atualizam sozinhos).
 - Confirmar o título do cargo na Revizia e a instituição da formação Azure.
 - Conferir a redação NAA dos versículos e completar a lista.
 - Foto do Ricardo A. Santos e os textos dos 8 depoimentos.
-- Publicar o currículo em PDF.
+- Corrigir no PDF do currículo: GitHub (biel5z → gabcorreiadev), “OBEJTIVO” e o cargo da Revizia.
+- `src/components/Motion.tsx` não é mais usado e pode ser apagado.

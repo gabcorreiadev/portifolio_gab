@@ -33,6 +33,7 @@
 
 .item {
   @include card;
+  overflow: hidden;
   display: flex;
   align-items: center;
   gap: 12px;

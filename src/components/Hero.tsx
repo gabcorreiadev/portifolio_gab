@@ -1,16 +1,21 @@
 import { perfil, whatsappUrl } from "@/data/perfil";
 import { depoimentosPublicados } from "@/data/depoimentos";
 import { empresas } from "@/data/experiencia";
+import Link from "next/link";
 import Icon from "./Icon";
 import styles from "./Hero.module.scss";
 
 export default function Hero() {
   const [primeiro, ...resto] = perfil.nome.split(" ");
   return (
-    <section id="inicio" className={styles.hero} aria-labelledby="hero-titulo">
+    <section id="inicio" className={styles.hero} aria-labelledby="hero-titulo" data-hero-scroll>
+      <div className="aurora" aria-hidden><span /><span /><span /></div>
       <div className={styles.grid} aria-hidden />
+      <div className={styles.bgText} aria-hidden data-hero-bg>
+        FRONT-END · UX/UI · ACESSIBILIDADE · FRONT-END · UX/UI
+      </div>
       <div className={`container ${styles.inner}`}>
-        <div className={styles.texto}>
+        <div className={styles.texto} data-hero-texto>
           <p className="eyebrow" data-hero>Olá, eu sou</p>
           <h1 id="hero-titulo" className={styles.nome} data-hero>
             {primeiro}
@@ -28,13 +33,13 @@ export default function Hero() {
           <p className={styles.apoio} data-hero>{perfil.fraseApoio}</p>
 
           <div className={styles.ctas} data-hero>
-            <a className="btn btn-primary" href={whatsappUrl()} target="_blank" rel="noopener noreferrer">
+            <a className="btn btn-primary" href={whatsappUrl()} target="_blank" rel="noopener noreferrer" data-magnetic>
               <Icon name="whatsapp" /> Vamos conversar
               <span className="sr-only">(abre o WhatsApp em nova aba)</span>
             </a>
-            <a className="btn btn-ghost" href="#projetos">
+            <Link className="btn btn-ghost" href="/projetos/" data-magnetic>
               Ver projetos <Icon name="arrowRight" />
-            </a>
+            </Link>
             {perfil.curriculo && (
               <a className={styles.cv} href={perfil.curriculo} download>
                 <Icon name="download" size={18} /> Baixar currículo (PDF)
@@ -63,7 +68,7 @@ export default function Hero() {
           </div>
         </div>
       </div>
-      <a href="#sobre" className={styles.scroll} aria-label="Rolar para a seção Sobre">
+      <a href="#manifesto" className={styles.scroll} aria-label="Rolar para baixo">
         <span />
       </a>
     </section>

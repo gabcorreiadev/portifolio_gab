@@ -35,6 +35,20 @@ export const grupos: GrupoStack[] = [
       { id: "hubspot", nome: "HubSpot" },
     ],
   },
+  {
+    titulo: "Nos projetos pessoais",
+    itens: [
+      { id: "vite", nome: "Vite" },
+      { id: "tailwind", nome: "Tailwind CSS" },
+      { id: "tanstack", nome: "TanStack Query" },
+      { id: "node", nome: "Node.js" },
+      { id: "fastify", nome: "Fastify" },
+      { id: "zod", nome: "Zod" },
+      { id: "vitest", nome: "Vitest" },
+      { id: "pocketbase", nome: "PocketBase" },
+      { id: "netlify", nome: "Netlify" },
+    ],
+  },
 ];
 
 /** Nome legível de uma stack pelo id (usado nos cards de projeto). */

@@ -41,7 +41,7 @@ export default function Depoimentos() {
       <div className="container">
         <div className="section-head">
           <p className="eyebrow">Depoimentos</p>
-          <h2 id="depoimentos-titulo">O que dizem sobre trabalhar comigo</h2>
+          <h2 id="depoimentos-titulo" data-split>O que dizem sobre trabalhar comigo</h2>
           {preview && <p className={styles.aviso}>Modo de pré-visualização: textos de exemplo.</p>}
         </div>
 
@@ -56,7 +56,7 @@ export default function Depoimentos() {
 
         <ul className={styles.lista} aria-live="polite">
           {visiveis.map((d) => (
-            <li key={d.slug} className={styles.card}>
+            <li key={d.slug} className={styles.card} data-spot>
               <Icon name="quote" size={26} className={styles.aspas} />
               <blockquote><p>{d.texto}</p></blockquote>
               <div className={styles.autor}>
