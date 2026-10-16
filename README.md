@@ -57,6 +57,6 @@ Os efeitos ficam todos em `src/components/Effects.tsx` e são ligados por atribu
 - Atualizar `contribuicoes` em `src/data/github.ts` de tempos em tempos (repositórios e seguidores atualizam sozinhos).
 - Confirmar o título do cargo na Revizia e a instituição da formação Azure.
 - Conferir a redação NAA dos versículos e completar a lista.
-- Depoimentos: faltam 6 textos (publicados: Gabriel Neves e Guilherme Zalla) e a foto do Ricardo A. Santos.
+- Depoimentos: publicados Gabriel Neves, Guilherme Zalla e Widiney Interaminense; faltam os textos dos outros 6.
 - Corrigir no PDF do currículo: GitHub (biel5z → gabcorreiadev), “OBEJTIVO” e o cargo da Revizia.
 - `src/components/Motion.tsx` não é mais usado e pode ser apagado.

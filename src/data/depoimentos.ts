@@ -60,6 +60,17 @@ export const depoimentos: Depoimento[] = [
     texto: "",
   },
   {
+    slug: "widiney-interaminense",
+    nome: "Widiney Henrique Interaminense",
+    cargo: "Front-End Angular Developer",
+    empresa: "Revizia",
+    selo: "Mentor",
+    linkedin: "https://www.linkedin.com/in/widiney-interaminense/",
+    foto: "/img/depoimentos/widiney-interaminense.webp",
+    texto:
+      "Acompanhei o desenvolvimento do Gabriel como estagiário de front-end com foco em Angular. Desde o início, mostrou proatividade, curiosidade técnica e uma capacidade admirável de aprender rápido. Destacou-se pela atenção aos detalhes, pelo código organizado e pelo compromisso com boas práticas, além da ótima comunicação e abertura a feedbacks. Um talento promissor, que recomendo fortemente.",
+  },
+  {
     slug: "isabela-delgado",
     nome: "Isabela Delgado",
     cargo: "Líder de Sucesso do Cliente, Suporte e Onboarding",
