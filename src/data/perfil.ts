@@ -31,6 +31,7 @@ export const navegacao = [
   { href: "/sobre/", label: "Sobre" },
   { href: "/trajetoria/", label: "Trajetória" },
   { href: "/projetos/", label: "Projetos" },
+  { href: "/comece/", label: "Comece aqui" },
   { href: "/contato/", label: "Contato" },
 ];
 

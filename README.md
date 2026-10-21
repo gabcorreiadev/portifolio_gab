@@ -1,6 +1,6 @@
 # Portfólio — Gabriel Correia Reis
 
-Site pessoal publicado em **gabcorreia.com.br**, com cinco páginas: Início, Sobre, Trajetória, Projetos e Contato.
+Site pessoal publicado em **gabcorreia.com.br**, com seis páginas: Início, Sobre, Trajetória, Projetos, Comece aqui e Contato.
 
 **Stack:** Next.js 15 (App Router, export estático) · TypeScript · SCSS Modules · GSAP (ScrollTrigger + SplitText) · Lenis · Simple Icons · Netlify
 
@@ -27,6 +27,7 @@ Tudo fica em `src/data/` — não é preciso mexer nos componentes.
 | `depoimentos.ts` | depoimentos (o card só aparece quando `texto` estiver preenchido) |
 | `versiculos.ts` | versículo do dia (NAA) |
 | `github.ts` | números do GitHub (fallback) |
+| `recomendacoes.ts` | página Comece aqui: texto de abertura, SENAI, trilhas, cursos e conselhos |
 
 Imagens ficam em `public/img/` (`hero/`, `projetos/`, `depoimentos/`). Use WebP; depoimentos em 400×400.
 
@@ -40,6 +41,7 @@ Imagens ficam em `public/img/` (`hero/`, `projetos/`, `depoimentos/`). Use WebP;
 | `/sobre/` | `src/app/sobre/page.tsx` | Resumo, soft skills, stacks, curiosidades em cards empilhados, versículo |
 | `/trajetoria/` | `src/app/trajetoria/page.tsx` | Ano gigante por marco, experiência, formação |
 | `/projetos/` | `src/app/projetos/page.tsx` | Destaques (`destaque: true`) em blocos grandes; o resto em cards com filtro por tecnologia; GitHub em números; bastidores |
+| `/comece/` | `src/app/comece/page.tsx` | Recomendações para quem quer começar: SENAI, trilhas (conhecer, front, back) e conselhos da comunidade |
 | `/contato/` | `src/app/contato/page.tsx` | Canais, mensagem pronta (WhatsApp/e-mail), currículo |
 
 ## Efeitos
